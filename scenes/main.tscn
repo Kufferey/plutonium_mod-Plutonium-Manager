@@ -142,12 +142,11 @@ text = "PATH SETTINGS:"
 [node name="Bo2PathTxt" type="Label" parent="States/Options"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 312.0
+offset_top = 336.0
 offset_right = 240.0
-offset_bottom = 385.0
+offset_bottom = 371.0
 theme = SubResource("Theme_kn5o1")
-text = "Bo2 T6r
-path:"
+text = "Bo2 path:"
 
 [node name="Bo2Path" type="TextEdit" parent="States/Options"]
 layout_mode = 0
@@ -156,7 +155,7 @@ offset_top = 319.0
 offset_right = 920.0
 offset_bottom = 383.0
 theme = SubResource("Theme_r6khx")
-placeholder_text = "C://PATH_TO_YOUR_BO2_T6R_IMAGES_FOLDER"
+placeholder_text = "C://PATH_TO_YOUR_BO2_T6R_FOLDER"
 
 [node name="PlutoPathTxt" type="Label" parent="States/Options"]
 layout_mode = 0

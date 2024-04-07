@@ -97,19 +97,27 @@ func launch_click() -> void:
 func add_click() -> void:
 	show_state("Modloader")
 	
+	DirAccess.make_dir_recursive_absolute(saved_data["bo2_path"] + "/T6R/data/images")
+	
 	$States/Modloader/FileDialog.set("root_subfolder", ("/users/"+str(OS.get_environment("USERNAME"))+"/downloads"))
 	$States/Modloader/FileDialog.popup()
 
 func add_directory_selected( dir:String ) -> void:
 	#var new_dir:PackedStringArray = DirAccess.get_files_at(dir)
-	#var files_contents:Dictionary = {}
 	
-	#for items in (DirAccess.get_files_at(dir+"/")): 
-		#DirAccess.rename_absolute(dir+"/"+items, str(saved_data["bo2_path"]))
-		#print(items)
+	for items in (DirAccess.get_files_at(dir+"/")): 
+		#DirAccess.rename_absolute(dir+"/"+items, saved_data["bo2_path"] + "T6R/data/images/" + items)
+		DirAccess.rename_absolute(dir + "/" + items, saved_data["bo2_path"] + "/T6R/data/images/" + items)
+		print("FROM: " + dir + "/" + items)
+		print("TO: \n" + saved_data["bo2_path"] + "/T6R/data/images/" + items)
 	pass
 
 func settings_click() -> void:
+	$States/Options/PlutoPath.text = str(saved_data["pluto_path"])
+	$States/Options/Bo2Path.text = str(saved_data["bo2_path"])
+	
+	$States/Options/Tooltip.button_pressed = saved_data["tooltip"]
+	$States/Options/Fullscreen.button_pressed = saved_data["fullscreen"]
 	show_state("Options")
 
 func source_click() -> void:
@@ -174,6 +182,9 @@ func check_settings() -> void:
 	
 	if !saved_data["tooltip"] : $InfoText.hide()
 	elif saved_data["tooltip"] : $InfoText.show()
+	
+	saved_data["bo2_path"] = saved_data["bo2_path"].replace("\\", "/")
+	saved_data["pluto_path"] = saved_data["pluto_path"].replace("\\", "/")
 
 func _ready() -> void:
 	info_text = $InfoText
