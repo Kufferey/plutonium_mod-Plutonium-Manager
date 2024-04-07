@@ -1,0 +1,373 @@
+[gd_scene load_steps=19 format=3 uid="uid://dh68xrabkdcsn"]
+
+[ext_resource type="Script" path="res://src/main.gd" id="1_3nppr"]
+[ext_resource type="Theme" uid="uid://p8nnhtpplbcs" path="res://assets/mouse_text/button.tres" id="2_2akvd"]
+[ext_resource type="Texture2D" uid="uid://riadgshdw6v8" path="res://assets/side_menu/add.png" id="2_svvp6"]
+[ext_resource type="Texture2D" uid="uid://cebqdyagfftcw" path="res://assets/side_menu/wrench.png" id="3_ml7s5"]
+[ext_resource type="Texture2D" uid="uid://cq3dcwln4mofw" path="res://assets/side_menu/source.png" id="5_6umff"]
+[ext_resource type="Texture2D" uid="uid://dgkh5eiosrgc3" path="res://assets/side_menu/help.png" id="5_g0722"]
+[ext_resource type="Texture2D" uid="uid://opapch83cv6v" path="res://assets/side_menu/play.png" id="7_ql17k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bdkj"]
+bg_color = Color(0.0470588, 0, 0.12549, 1)
+
+[sub_resource type="Theme" id="Theme_j33jk"]
+Panel/styles/panel = SubResource("StyleBoxFlat_4bdkj")
+
+[sub_resource type="Theme" id="Theme_86hj0"]
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_kn5o1"]
+default_font_size = 25
+
+[sub_resource type="Theme" id="Theme_r6khx"]
+default_font_size = 35
+
+[sub_resource type="Theme" id="Theme_jm3uy"]
+default_font_size = 25
+
+[sub_resource type="Theme" id="Theme_3k6p0"]
+default_font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35r2y"]
+bg_color = Color(0.0392157, 0, 0.0784314, 1)
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_ug857"]
+Panel/styles/panel = SubResource("StyleBoxFlat_35r2y")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hbnj"]
+content_margin_left = 25.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 50
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+corner_detail = 20
+shadow_size = 1
+
+[sub_resource type="Theme" id="Theme_natn6"]
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_4hbnj")
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3nppr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_j33jk")
+
+[node name="States" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Normal" type="Control" parent="States"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Options" type="Control" parent="States"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Apply" type="Button" parent="States/Options"]
+modulate = Color(0, 1, 0.231373, 1)
+layout_mode = 2
+offset_top = 512.0
+offset_right = 192.0
+offset_bottom = 576.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "APPLY"
+icon = ExtResource("3_ml7s5")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Discard" type="Button" parent="States/Options"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+offset_top = 576.0
+offset_right = 192.0
+offset_bottom = 640.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "DISCARD"
+icon = ExtResource("3_ml7s5")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Basic" type="Label" parent="States/Options"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 249.0
+offset_bottom = 50.0
+theme = SubResource("Theme_86hj0")
+text = "BASIC SETTINGS:"
+
+[node name="Paths" type="Label" parent="States/Options"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 200.0
+offset_right = 249.0
+offset_bottom = 242.0
+theme = SubResource("Theme_86hj0")
+text = "PATH SETTINGS:"
+
+[node name="Bo2PathTxt" type="Label" parent="States/Options"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 312.0
+offset_right = 240.0
+offset_bottom = 385.0
+theme = SubResource("Theme_kn5o1")
+text = "Bo2 T6r
+path:"
+
+[node name="Bo2Path" type="TextEdit" parent="States/Options"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 319.0
+offset_right = 920.0
+offset_bottom = 383.0
+theme = SubResource("Theme_r6khx")
+placeholder_text = "C://PATH_TO_YOUR_BO2_T6R_IMAGES_FOLDER"
+
+[node name="PlutoPathTxt" type="Label" parent="States/Options"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 401.0
+offset_right = 257.0
+offset_bottom = 443.0
+theme = SubResource("Theme_kn5o1")
+text = "Pluto path:"
+
+[node name="PlutoPath" type="TextEdit" parent="States/Options"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 384.0
+offset_right = 920.0
+offset_bottom = 448.0
+theme = SubResource("Theme_r6khx")
+placeholder_text = "C://PATH_TO_YOUR_PLUTONIUM.exe"
+
+[node name="Tooltip" type="CheckButton" parent="States/Options"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 160.0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_jm3uy")
+button_pressed = true
+text = "Tooltips"
+icon = ExtResource("3_ml7s5")
+expand_icon = true
+
+[node name="Fullscreen" type="CheckButton" parent="States/Options"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 96.0
+offset_right = 704.0
+offset_bottom = 160.0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_jm3uy")
+text = "Fullscreen"
+icon = ExtResource("3_ml7s5")
+expand_icon = true
+
+[node name="Modloader" type="Control" parent="States"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FileDialog" type="FileDialog" parent="States/Modloader"]
+title = "Open the (UNZIPPED) mod folder"
+initial_position = 1
+size = Vector2i(922, 504)
+popup_window = true
+ok_button_text = "Select Current Folder"
+mode_overrides_title = false
+file_mode = 2
+access = 2
+root_subfolder = "/users/mycli/downloads"
+
+[node name="Help" type="Control" parent="States"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="about" type="RichTextLabel" parent="States/Help"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_3k6p0")
+bbcode_enabled = true
+text = "This is going to go over how to use this app.
+
+[color=red]WORKS FOR WINDOWS 11 AND ONLY WINDOWS[/color]
+MAY WORK FOR WINDOWS 10 TOO. Maybe I might make this for another OS other then windows.
+
+First this app was made with [color=lightblue] [url=https://plutonium.pw/] PLUTONIUM [/url] [/color] in mind.
+
+Anyways, first thing you should do is go to [color=powderblue]SETTINGS[/color] and then [color=lime]PATHS[/color].
+Edit the [color=orange]Bo2[/color] [color=lime]PATH[/color]. Then link it with your [color=blue]STEAM[/color] [color=orange]Bo2[/color] Folder. And then the application will take care of the rest."
+
+[node name="SidePannel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 192.0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="SidePannel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ug857")
+
+[node name="Buttons" type="Control" parent="SidePannel"]
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 650.0
+
+[node name="TempButton" type="Button" parent="SidePannel/Buttons"]
+visible = false
+layout_mode = 2
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "TESTING"
+icon = ExtResource("2_svvp6")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Add" type="Button" parent="SidePannel/Buttons"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "ADD
+"
+icon = ExtResource("2_svvp6")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Settings" type="Button" parent="SidePannel/Buttons"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 256.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "SETTINGS
+"
+icon = ExtResource("3_ml7s5")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Source" type="Button" parent="SidePannel/Buttons"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 512.0
+offset_right = 192.0
+offset_bottom = 576.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "SOURCE"
+icon = ExtResource("5_6umff")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Help" type="Button" parent="SidePannel/Buttons"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 576.0
+offset_right = 192.0
+offset_bottom = 640.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "HELP
+"
+icon = ExtResource("5_g0722")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="Play" type="Button" parent="SidePannel/Buttons"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 72.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_2akvd")
+text = "LAUNCH"
+icon = ExtResource("7_ql17k")
+alignment = 0
+clip_text = true
+expand_icon = true
+
+[node name="InfoText" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 226.0
+offset_bottom = 23.0
+mouse_filter = 2
+theme = SubResource("Theme_natn6")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
