@@ -1,6 +1,6 @@
 class_name SaveAndLoad extends Resource
 
-const DEV_MODE:bool = true # For exporting to release.
+const DEV_MODE:bool = true
 
 static func save_file( path:String , contents:String ) -> void:
 	if !DEV_MODE:

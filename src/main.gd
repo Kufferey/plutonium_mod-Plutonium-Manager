@@ -1,7 +1,7 @@
 extends Control
 
-const CODING_EXTENSION:String = ".gsc"
-const IMAGE_EXTENSION:String = ".iwi"
+const CODING_EXTENSION:String = "gsc"
+const IMAGE_EXTENSION:String = "iwi"
 
 var selected_game:String = "bo2"
 var game_list:Array[String] = ["bo2"] # More will come (I hope.)
@@ -97,20 +97,47 @@ func launch_click() -> void:
 func add_click() -> void:
 	show_state("Modloader")
 	
-	DirAccess.make_dir_recursive_absolute(saved_data["bo2_path"] + "/T6R/data/images")
+	if !DirAccess.dir_exists_absolute(saved_data["bo2_path"] + "/T6R/data/images") : DirAccess.make_dir_recursive_absolute(saved_data["bo2_path"] + "/T6R/data/images")
+	
+	$States/Modloader/Label.text = "Select a folder to move to mods"
 	
 	$States/Modloader/FileDialog.set("root_subfolder", ("/users/"+str(OS.get_environment("USERNAME"))+"/downloads"))
 	$States/Modloader/FileDialog.popup()
 
 func add_directory_selected( dir:String ) -> void:
-	#var new_dir:PackedStringArray = DirAccess.get_files_at(dir)
+	#var total_files:int
+	#var total_files_start:int
+	var iwi:int
+	var gsc:int
+	#var total_files_together:PackedStringArray = DirAccess.get_files_at(dir+"/")
+	#for i in total_files_together:
+		#total_files += 1
+		#total_files_start += 1
+		
+	var progress:int = 0
+	var is_done:bool = false
 	
-	for items in (DirAccess.get_files_at(dir+"/")): 
-		#DirAccess.rename_absolute(dir+"/"+items, saved_data["bo2_path"] + "T6R/data/images/" + items)
-		DirAccess.rename_absolute(dir + "/" + items, saved_data["bo2_path"] + "/T6R/data/images/" + items)
-		print("FROM: " + dir + "/" + items)
-		print("TO: \n" + saved_data["bo2_path"] + "/T6R/data/images/" + items)
-	pass
+	var unkown_files:int
+	
+	for items in (DirAccess.get_files_at(dir+"/")):
+		#total_files -= 1
+		if items.get_extension() == IMAGE_EXTENSION:
+			iwi += 1
+			progress += 1
+			DirAccess.rename_absolute(dir + "/" + items, saved_data["bo2_path"] + "/T6R/data/images/" + items)
+			print("FROM: " + dir + "/" + items)
+			print("TO: \n" + saved_data["bo2_path"] + "/T6R/data/images/" + items)
+		elif items.get_extension() == CODING_EXTENSION:
+			gsc += 1
+			progress += 1
+		else :
+			unkown_files += 1
+			progress += 1
+	is_done = true
+	
+	if unkown_files != 0 : $States/Modloader/Label.text = "DONE, " + str(unkown_files) + " file(s) could not be put into mods.\n(These " + str(unkown_files) + " file(s) were not a .iwi or .gsc)"
+	else : $States/Modloader/Label.text = "DONE, All good!"
+	if progress == 0 : $States/Modloader/Label.text = "No File Detected."
 
 func settings_click() -> void:
 	$States/Options/PlutoPath.text = str(saved_data["pluto_path"])
