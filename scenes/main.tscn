@@ -202,6 +202,7 @@ icon = ExtResource("3_ml7s5")
 expand_icon = true
 
 [node name="Modloader" type="Control" parent="States"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -373,16 +374,20 @@ clip_text = true
 expand_icon = true
 
 [node name="InfoText" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 226.0
 offset_bottom = 23.0
 mouse_filter = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_natn6")
 bbcode_enabled = true
+text = "Mama Mea"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
+
+[connection signal="mouse_entered" from="InfoText" to="." method="_on_info_text_mouse_entered"]
+[connection signal="mouse_exited" from="InfoText" to="." method="_on_info_text_mouse_exited"]

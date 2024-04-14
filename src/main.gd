@@ -7,6 +7,10 @@ var selected_game:String = "bo2"
 var game_list:Array[String] = ["bo2"] # More will come (I hope.)
 
 var hovered_border_color:Color = Color(0.047, 0, 0.125)
+
+var hovered_tooltip_color:Color = Color(0, 0.682, 1)
+var non_hovered_tooltip_color:Color = Color(1, 1, 1)
+
 @onready var panel = $SidePannel/Panel
 	
 var is_holding_control:bool = false
@@ -85,7 +89,7 @@ func set_h_pos() -> void:
 				elif mouse_pos.y >= get_viewport().size.y / 2 : $InfoText.position.y = mouse_pos.y - 15
 	
 	elif (is_holding_control &&
-		saved_data["tooltip"]) : $InfoText.position = $InfoText.position
+		saved_data["tooltip"]) : if is_hovering : $InfoText.position = $InfoText.position
 
 func launch_click() -> void:
 	if !saved_data["pluto_path"].ends_with("plutonium.exe"):
@@ -284,9 +288,11 @@ func _ready() -> void:
 				if !is_holding_control : hovering_text = ""
 				)
 
+func check_for_tooltip_hover() -> void:
+	var tooltip:RichTextLabel = $InfoText
+
 func _process(delta) -> void:
 	$InfoText.text = hovering_text
-	
 	if saved_data["tooltip"]:
 		if (
 			is_hovering
@@ -313,6 +319,24 @@ func _process(delta) -> void:
 		$InfoText.get("mouse_entered")
 		&&
 		Input.is_action_pressed("LCLICK")
+		&&
+		is_hovering
 	):
+		h_lock = true
 		$InfoText.position = get_global_mouse_position() - Vector2(($InfoText.get_rect().size.x / 2),
 		0)
+	else :
+		h_lock = false
+	
+	check_for_tooltip_hover()
+
+var h_lock:bool = false
+func _on_info_text_mouse_entered():
+	if ! h_lock:
+		is_hovering = true
+		$InfoText.modulate = hovered_tooltip_color
+
+func _on_info_text_mouse_exited():
+	if ! h_lock:
+		is_hovering = false
+		$InfoText.modulate = non_hovered_tooltip_color
