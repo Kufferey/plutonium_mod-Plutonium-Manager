@@ -4,4 +4,4 @@
 * Save system.
 * (Optional) Launch from the app.
 ## Building
-Before exporting, make sure to go to "src/data/"
+Before exporting, make sure to go to "src/save/data.gd". And change DEV_MODE to false.
