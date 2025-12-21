@@ -1,4 +1,5 @@
 # plutonium_mod-Plutonium-Manager
+[!NOTE]
 > This is no longer being worked on and hasn’t since 2024.
 > Plutonium has changed a lot, so this mod manager is not compatible.
 ## Features
